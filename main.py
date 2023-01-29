@@ -23,7 +23,15 @@ var_list = []
 for i in range(len(query_dict['variables'])):
     var_list.append(query_dict['variables'][i]['value'])
 
-# print(var_list)
+#FILTERの条件リストを作成
+filter_list = []
+for i in range(len(query_dict['where'])):
+    if(query_dict['where'][i]['type'] == 'filter'):
+        prefix = query_dict['where'][i]['expression']['args']
+        filter_list.append([prefix[0]['value'],prefix[0]['value'] + ' ' + query_dict['where'][i]['expression']['operator'] + ' "' + prefix[1]['value'] + '"'])
+
+#print(var_list)
+print(filter_list)
 
 #フィルタリストを作成
 
@@ -37,11 +45,12 @@ for i in range(len(query_dict['where'][0]['triples'])):
     q_predicate = query_dict['where'][0]['triples'][i]['predicate']['value']
     for j in range(len(mapping_dict)):
         predicate = mapping_dict[j]["predicate"]
+
         if(q_predicate == predicate):
             sql = mapping_dict[j]["SQL"]
             query = query_dict['where'][0]['triples'][i]
             mapping = mapping_dict[j]
-            answer = trans_sql.f(sql,query,mapping)
+            answer = trans_sql.f(sql,query,mapping,filter_list)
             re_sql = answer[0]
             if(answer[1] != []):
                 for i in range(len(answer[1])):
@@ -50,11 +59,12 @@ for i in range(len(query_dict['where'][0]['triples'])):
                 SQL_subquery.append(re_sql)
 
     insert_SQL = ''
-    for k in range(len(SQL_subquery)):
-        insert_SQL = insert_SQL + SQL_subquery[k]
-        if(k != len(SQL_subquery) - 1):
-            insert_SQL = insert_SQL + ' UNION '
-    insert_SQL = insert_SQL.replace(';','') + ';'
+    if(len(SQL_subquery)!= 0):
+        for k in range(len(SQL_subquery)):
+            insert_SQL = insert_SQL + SQL_subquery[k]
+            if(k != len(SQL_subquery) - 1):
+                insert_SQL = insert_SQL + ' UNION '
+        insert_SQL = insert_SQL.replace(';','') + ';'
 
     SQL_query.append(insert_SQL)
 
@@ -150,25 +160,33 @@ for i in range(len(join_header)):
         distinct_head_number_set.append(i)
         distinct_head_set.append(join_header[i])
 
-# print(join_header)
-# print(distinct_head_number_set)
-# print(distinct_head_set)
+#print(join_header)
+#print(distinct_head_number_set)
+#print(distinct_head_set)
 # join_result.append([0,1,2,3,4])
 
 fix = 0
+right = 0
 for i in range(len(distinct_head_number_set)-1):
     left = distinct_head_number_set[i] - fix
     right = distinct_head_number_set[i+1] - fix
     # print(left)
     # print(right)
     re_join_result = []
-    for row in join_result:
-        re_row = row[:left+1] + row[right:]
-        re_join_result.append(re_row)
-    if(right - left > 1):
-        fix = fix + (right - left) - 1
-    join_result = re_join_result
-    # print(re_join_result)
+    if(i == len(distinct_head_number_set)-2):
+        for row in join_result:
+            re_row = row[:left+1] + list(row[right])
+            re_join_result.append(re_row)
+        join_result = re_join_result
+    else:
+        for row in join_result:
+            re_row = row[:left+1] + row[right:]
+            re_join_result.append(re_row)
+        if(right - left > 1):
+            fix = fix + (right - left) - 1
+        join_result = re_join_result
+    #print(re_join_result)
+
 
 #print(join_result)
 

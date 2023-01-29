@@ -1,8 +1,10 @@
 import csv
 import rewriter
 
-def f(sql:str, sparql, mapping):
+def f(sql:str, sparql, mapping, filter_list):
     #subject
+    # print(sparql)
+    # print(mapping)
     trans_URI = []
     if(sparql['subject']['termType']=='Variable'):
         value = sparql['subject']['value']
@@ -25,6 +27,10 @@ def f(sql:str, sparql, mapping):
         value = sparql['object']['value']
         sql = sql.replace(mapping['object'], value)
         trans_URI.append([value, mapping['object_uri']])
+
+        for filter in filter_list:
+            if(filter[0] == value):
+                sql = rewriter.rewrite_where_sql_filter(sql,filter[1])
 
     
     elif(sparql['object']['termType']=='NamedNode'):

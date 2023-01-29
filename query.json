@@ -11,27 +11,7 @@
     },
     {
       "termType": "Variable",
-      "value": "date"
-    },
-    {
-      "termType": "Variable",
-      "value": "d"
-    },
-    {
-      "termType": "Variable",
-      "value": "genre"
-    },
-    {
-      "termType": "Variable",
-      "value": "c_uri"
-    },
-    {
-      "termType": "Variable",
-      "value": "name"
-    },
-    {
-      "termType": "Variable",
-      "value": "b"
+      "value": "sche"
     }
   ],
   "where": [
@@ -69,63 +49,7 @@
         {
           "subject": {
             "termType": "Variable",
-            "value": "s"
-          },
-          "predicate": {
-            "termType": "NamedNode",
-            "value": "http://example.com/predicate/movie/date"
-          },
-          "object": {
-            "termType": "Variable",
-            "value": "date"
-          }
-        },
-        {
-          "subject": {
-            "termType": "Variable",
-            "value": "s"
-          },
-          "predicate": {
-            "termType": "NamedNode",
-            "value": "http://example.com/predicate/movie/director"
-          },
-          "object": {
-            "termType": "Variable",
-            "value": "d"
-          }
-        },
-        {
-          "subject": {
-            "termType": "Variable",
-            "value": "s"
-          },
-          "predicate": {
-            "termType": "NamedNode",
-            "value": "http://example.com/predicate/movie/genre"
-          },
-          "object": {
-            "termType": "NamedNode",
-            "value": "https://www.wikidata.org/wiki/Q157394"
-          }
-        },
-        {
-          "subject": {
-            "termType": "Variable",
-            "value": "s"
-          },
-          "predicate": {
-            "termType": "NamedNode",
-            "value": "http://example.com/predicate/movie/played_by"
-          },
-          "object": {
-            "termType": "Variable",
-            "value": "c_uri"
-          }
-        },
-        {
-          "subject": {
-            "termType": "Variable",
-            "value": "c_uri"
+            "value": "sche"
           },
           "predicate": {
             "termType": "NamedNode",
@@ -133,38 +57,46 @@
           },
           "object": {
             "termType": "NamedNode",
-            "value": "http://example.com/ontology/Cast"
+            "value": "http://example.com/ontology/Schedule"
           }
         },
         {
           "subject": {
             "termType": "Variable",
-            "value": "c_uri"
+            "value": "sche"
           },
           "predicate": {
             "termType": "NamedNode",
-            "value": "http://example.com/predicate/cast/name"
+            "value": "http://example.com/predicate/movie/Screening"
           },
           "object": {
             "termType": "Variable",
-            "value": "name"
-          }
-        },
-        {
-          "subject": {
-            "termType": "Variable",
-            "value": "c_uri"
-          },
-          "predicate": {
-            "termType": "NamedNode",
-            "value": "http://xmlns.com/foaf/0.1/Birthday"
-          },
-          "object": {
-            "termType": "Variable",
-            "value": "b"
+            "value": "s"
           }
         }
       ]
+    },
+    {
+      "type": "filter",
+      "expression": {
+        "type": "operation",
+        "operator": "=",
+        "args": [
+          {
+            "termType": "Variable",
+            "value": "s"
+          },
+          {
+            "termType": "Literal",
+            "value": "ターミネーター4",
+            "language": "",
+            "datatype": {
+              "termType": "NamedNode",
+              "value": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          }
+        ]
+      }
     }
   ],
   "type": "query",
@@ -176,6 +108,8 @@
     "Schedule": "http://example.com/predicate/schedule/",
     "Theater": "http://example.com/predicate/theater/",
     "foaf": "http://xmlns.com/foaf/0.1/",
+    "sch": "http://example.com/schedule/",
+    "The": "http://example.com/theater/",
     "Wikidata": "https://www.wikidata.org/wiki/"
   }
 }
