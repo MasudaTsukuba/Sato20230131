@@ -1,0 +1,48 @@
+mapping.jsonについて
+
+マッピングデータは下記の属性を１セットに構成されています。
+- mappingID: マッピングデータの識別IDを指します。
+- subject_uri: 主語のURIの変換方法を指します。wikidata_titleとwikidata_genreなど、テーブル内の属性によって変換対応表は分けて表記しています。
+- object_uri: 目的語のURIの変換方法を指します。基本的にはsubject_uriと同じです。object_uriのみ以下の２つの方法が許されています。
+・plain: URIに変換せず、そのままリテラルとする。
+・-: とりうるURIが１つのみと決まっていて、ある１つのURIを取るときのみSQLの変換候補となる。主に、<?s rdf:type ex:Movie>など、?sのURIのタイプを指定するトリプルパターンに使用。
+
+- subject: SQL文内でどの変数がRDFトリプルのsubjectに当たるか記載しています。
+- predicate: このマッピングデータは、どのpredicateのURIに対応しているか記載しています。
+- object: SQL文内でどの変数がRDFトリプルのobjectに当たるか記載しています。ただし、object_uriの値が"-"で、URIが記載されているときは参照しているトリプルパターンのうち、目的語が取るべきURIを示しています。
+- SQL: SPARQL->SQLの変換先となるSQL文を指しています。
+
+例1)
+        "mappingID":1,
+        "subject_uri":"wikidata_title",
+        "object_uri":"-",
+        "subject":"Var0",
+        "predicate":"http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "object":"http://example.com/ontology/Movie",
+        "SQL":"SELECT title AS Var0 FROM movie;"
+
+以上のマッピングデータは、slide.pptxにおける
+rdf:type(uri(title),ex:Movie) ⊇ S1.Movie( _ , title, _ , _ , _ )と同じです。
+
+例2)
+   	"mappingID":3,
+        "subject_uri":"wikidata_title",
+        "object_uri":"wikidata_genre",
+        "subject":"Var0",
+        "predicate":"http://example.com/predicate/movie/genre",
+        "object":"Var1",
+        "SQL":"SELECT title AS Var0, genre AS Var1 FROM movie;"
+
+以上のマッピングデータは、slide.pptxにおける
+Movie:genre(uri(title),uri(genre)) ⊇ S1.Movie( _ , title , genre, _ , _ )と同じです。
+
+
+以下は、PREFIXです。クエリ等に利用してください。
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX ex: <http://example.com/ontology/>
+PREFIX Movie: <http://example.com/predicate/movie/>
+PREFIX Cast: <http://example.com/predicate/cast/>
+PREFIX Schedule: <http://example.com/predicate/schedule/>
+PREFIX Theater: <http://example.com/predicate/theater/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>

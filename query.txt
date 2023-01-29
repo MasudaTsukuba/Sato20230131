@@ -1,0 +1,21 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX ex: <http://example.com/ontology/>
+PREFIX Movie: <http://example.com/predicate/movie/>
+PREFIX Cast: <http://example.com/predicate/cast/>
+PREFIX Schedule: <http://example.com/predicate/schedule/>
+PREFIX Theater: <http://example.com/predicate/theater/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX Wikidata: <https://www.wikidata.org/wiki/>
+
+SELECT ?s ?title ?date ?d ?c_uri ?name ?b
+WHERE {
+   ?s rdf:type ex:Movie.
+   ?s Movie:title ?title.
+   ?s Movie:date ?date.
+   ?s Movie:director ?d.
+   ?s Movie:genre Wikidata:Q157394.
+   ?s Movie:played_by ?c_uri.
+   ?c_uri rdf:type ex:Cast. 
+   ?c_uri Cast:name ?name.
+   ?c_uri foaf:Birthday ?b.
+} 

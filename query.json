@@ -1,0 +1,181 @@
+{
+  "queryType": "SELECT",
+  "variables": [
+    {
+      "termType": "Variable",
+      "value": "s"
+    },
+    {
+      "termType": "Variable",
+      "value": "title"
+    },
+    {
+      "termType": "Variable",
+      "value": "date"
+    },
+    {
+      "termType": "Variable",
+      "value": "d"
+    },
+    {
+      "termType": "Variable",
+      "value": "genre"
+    },
+    {
+      "termType": "Variable",
+      "value": "c_uri"
+    },
+    {
+      "termType": "Variable",
+      "value": "name"
+    },
+    {
+      "termType": "Variable",
+      "value": "b"
+    }
+  ],
+  "where": [
+    {
+      "type": "bgp",
+      "triples": [
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "s"
+          },
+          "predicate": {
+            "termType": "NamedNode",
+            "value": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+          },
+          "object": {
+            "termType": "NamedNode",
+            "value": "http://example.com/ontology/Movie"
+          }
+        },
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "s"
+          },
+          "predicate": {
+            "termType": "NamedNode",
+            "value": "http://example.com/predicate/movie/title"
+          },
+          "object": {
+            "termType": "Variable",
+            "value": "title"
+          }
+        },
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "s"
+          },
+          "predicate": {
+            "termType": "NamedNode",
+            "value": "http://example.com/predicate/movie/date"
+          },
+          "object": {
+            "termType": "Variable",
+            "value": "date"
+          }
+        },
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "s"
+          },
+          "predicate": {
+            "termType": "NamedNode",
+            "value": "http://example.com/predicate/movie/director"
+          },
+          "object": {
+            "termType": "Variable",
+            "value": "d"
+          }
+        },
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "s"
+          },
+          "predicate": {
+            "termType": "NamedNode",
+            "value": "http://example.com/predicate/movie/genre"
+          },
+          "object": {
+            "termType": "NamedNode",
+            "value": "https://www.wikidata.org/wiki/Q157394"
+          }
+        },
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "s"
+          },
+          "predicate": {
+            "termType": "NamedNode",
+            "value": "http://example.com/predicate/movie/played_by"
+          },
+          "object": {
+            "termType": "Variable",
+            "value": "c_uri"
+          }
+        },
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "c_uri"
+          },
+          "predicate": {
+            "termType": "NamedNode",
+            "value": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+          },
+          "object": {
+            "termType": "NamedNode",
+            "value": "http://example.com/ontology/Cast"
+          }
+        },
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "c_uri"
+          },
+          "predicate": {
+            "termType": "NamedNode",
+            "value": "http://example.com/predicate/cast/name"
+          },
+          "object": {
+            "termType": "Variable",
+            "value": "name"
+          }
+        },
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "c_uri"
+          },
+          "predicate": {
+            "termType": "NamedNode",
+            "value": "http://xmlns.com/foaf/0.1/Birthday"
+          },
+          "object": {
+            "termType": "Variable",
+            "value": "b"
+          }
+        }
+      ]
+    }
+  ],
+  "type": "query",
+  "prefixes": {
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "ex": "http://example.com/ontology/",
+    "Movie": "http://example.com/predicate/movie/",
+    "Cast": "http://example.com/predicate/cast/",
+    "Schedule": "http://example.com/predicate/schedule/",
+    "Theater": "http://example.com/predicate/theater/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "Wikidata": "https://www.wikidata.org/wiki/"
+  }
+}

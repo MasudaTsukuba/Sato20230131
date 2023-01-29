@@ -1,0 +1,231 @@
+[
+    {
+        "mappingID":1,
+        "subject_uri":"wikidata_title",
+        "object_uri":"-",
+        "subject":"Var0",
+        "predicate":"http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "object":"http://example.com/ontology/Movie",
+        "SQL":"SELECT title AS Var0 FROM movie;"
+    },
+
+    {
+        "mappingID":2,
+        "subject_uri":"wikidata_title",
+        "object_uri":"-",
+        "subject":"Var1",
+        "predicate":"http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "object":"http://example.com/ontology/Movie",
+        "SQL":"SELECT title AS Var1 FROM Movie2;"
+    },
+
+    {
+        "mappingID":3,
+        "subject_uri":"wikidata_title",
+        "object_uri":"wikidata_genre",
+        "subject":"Var2",
+        "predicate":"http://example.com/predicate/movie/genre",
+        "object":"Var3",
+        "SQL":"SELECT title AS Var2, genre AS Var3 FROM movie;"
+    },
+
+    {
+        "mappingID":4,
+        "subject_uri":"wikidata_title",
+        "object_uri":"plain",
+        "subject":"Var4",
+        "predicate":"http://example.com/predicate/movie/title",
+        "object":"Var5",
+        "SQL":"SELECT title AS Var4, title AS Var5 FROM movie;"
+    },
+
+    {
+        "mappingID":5,
+        "subject_uri":"wikidata_title",
+        "object_uri":"plain",
+        "subject":"Var6",
+        "predicate":"http://example.com/predicate/movie/title",
+        "object":"Var7",
+        "SQL":"SELECT title AS Var6, title AS Var7 FROM Movie2;"
+    },
+
+    {
+        "mappingID":6,
+        "subject_uri":"wikidata_title",
+        "object_uri":"plain",
+        "subject":"Var8",
+        "predicate":"http://example.com/predicate/movie/date",
+        "object":"Var9",
+        "SQL":"SELECT title AS Var8, date AS Var9 FROM movie;"
+    },
+
+    {
+        "mappingID":7,
+        "subject_uri":"wikidata_title",
+        "object_uri":"plain",
+        "subject":"Var10",
+        "predicate":"http://example.com/predicate/movie/date",
+        "object":"Var11",
+        "SQL":"SELECT title AS Var10, publication_date AS Var11 FROM Movie2;"
+    },
+
+    {
+        "mappingID":8,
+        "subject_uri":"wikidata_title",
+        "object_uri":"plain",
+        "subject":"Var12",
+        "predicate":"http://example.com/predicate/movie/director",
+        "object":"Var13",
+        "SQL":"SELECT title AS Var12, director AS Var13 FROM movie;"
+    },
+
+    {
+        "mappingID":9,
+        "subject_uri":"wikidata_title",
+        "object_uri":"plain",
+        "subject":"Var14",
+        "predicate":"http://example.com/predicate/movie/director",
+        "object":"Var15",
+        "SQL":"SELECT title AS Var14, director AS Var15 FROM Movie2;"
+    },
+
+    {
+        "mappingID":10,
+        "subject_uri":"wikidata_name",
+        "object_uri":"-",
+        "subject":"Var16",
+        "predicate":"http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "object":"http://example.com/ontology/Cast",
+        "SQL":"SELECT name AS Var16 FROM Cast;"
+    },
+
+    {
+        "mappingID":11,
+        "subject_uri":"wikidata_name",
+        "object_uri":"plain",
+        "subject":"Var17",
+        "predicate":"http://example.com/predicate/cast/name",
+        "object":"Var18",
+        "SQL":"SELECT name AS Var17, Name AS Var18 FROM Cast;"
+    },
+
+    {
+        "mappingID":12,
+        "subject_uri":"wikidata_name",
+        "object_uri":"plain",
+        "subject":"Var19",
+        "predicate":"http://xmlns.com/foaf/0.1/Birthday",
+        "object":"Var20",
+        "SQL":"SELECT name AS Var19, BirthOfDate AS Var20 FROM Cast;"
+    },
+
+    {
+        "mappingID":13,
+        "subject_uri":"wikidata_name",
+        "object_uri":"-",
+        "subject":"Var21",
+        "predicate":"http://example.com/predicate/cast/Nationality",
+        "object":"Var22",
+        "SQL":"SELECT name AS Var21, Nationality AS Var22 FROM Cast;"
+    },
+
+    {
+        "mappingID":14,
+        "subject_uri":"PREFIX_Theater",
+        "object_uri":"-",
+        "subject":"Var23",
+        "predicate":"http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "object":"http://example.com/ontology/Theater",
+        "SQL":"SELECT t_id AS Var23 FROM Theater;"
+    },
+
+    {
+        "mappingID":15,
+        "subject_uri":"PREFIX_Theater",
+        "object_uri":"plain",
+        "subject":"Var24",
+        "predicate":"http://example.com/predicate/theater/name",
+        "object":"Var25",
+        "SQL":"SELECT t_id AS Var24, name AS Var25 FROM Theater;"
+    },
+
+    {
+        "mappingID":16,
+        "subject_uri":"PREFIX_Theater",
+        "object_uri":"plain",
+        "subject":"Var26",
+        "predicate":"http://example.com/predicate/theater/address",
+        "object":"Var27",
+        "SQL":"SELECT name AS Var26, address AS Var27 FROM Theater;"
+    },
+
+    {
+        "mappingID":17,
+        "subject_uri":"PREFIX_Theater",
+        "object_uri":"plain",
+        "subject":"Var28",
+        "predicate":"http://example.com/predicate/theater/phone",
+        "object":"Var29",
+        "SQL":"SELECT name AS Var28, phone AS Var29 FROM Theater;"
+    },
+
+    {
+        "mappingID":18,
+        "subject_uri":"PREFIX_Theater",
+        "object_uri":"plain",
+        "subject":"Var30",
+        "predicate":"http://example.com/predicate/theater/map_code",
+        "object":"Var31",
+        "SQL":"SELECT name AS Var30, map_code AS Var31 FROM Theater;"
+    },
+
+    {
+        "mappingID":19,
+        "subject_uri":"wikidata_title",
+        "object_uri":"wikidata_name",
+        "subject":"Var32",
+        "predicate":"http://example.com/predicate/movie/played_by",
+        "object":"Var33",
+        "SQL":"SELECT title AS Var32, name AS Var33 FROM movie, Playedby, Cast WHERE (movie.m_id = Playedby.m_id) AND (Playedby.c_id = \"Cast\".c_id);"
+    },
+
+    {
+        "mappingID":20,
+        "subject_uri":"PREFIX_Schedule",
+        "object_uri":"-",
+        "subject":"Var34",
+        "predicate":"http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "object":"http://example.com/ontology/Schedule",
+        "SQL":"SELECT s_id AS Var34 FROM Movieplay"
+    },
+
+    {
+        "mappingID":21,
+        "subject_uri":"PREFIX_Schedule",
+        "object_uri":"Wikidata_title",
+        "subject":"Var35",
+        "predicate":"http://example.com/predicate/movie/Screening",
+        "object":"Var36",
+        "SQL":"SELECT s_id AS Var35, title AS Var36 FROM Movieplay, Movie2 WHERE Movieplay.mo_id = Movie2.mo_id;"
+    },
+
+    {
+        "mappingID":22,
+        "subject_uri":"PREFIX_Schedule",
+        "object_uri":"PREFIX_Theater",
+        "subject":"Var37",
+        "predicate":"http://example.com/predicate/movie/Screening_at",
+        "object":"Var38",
+        "SQL":"SELECT s_id AS Var37, name AS Var38 FROM Movieplay, Theater WHERE Movieplay.t_id = Theater.t_id;"
+    },
+
+    {
+        "mappingID":23,
+        "subject_uri":"PREFIX_Schedule",
+        "object_uri":"plain",
+        "subject":"Var39",
+        "predicate":"http://example.com/predicate/theater/date",
+        "object":"Var40",
+        "SQL":"SELECT s_id AS Var39, datetime AS Var40 FROM Movieplay;"
+    }
+]
