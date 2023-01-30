@@ -3,15 +3,19 @@
   "variables": [
     {
       "termType": "Variable",
-      "value": "s"
-    },
-    {
-      "termType": "Variable",
       "value": "title"
     },
     {
       "termType": "Variable",
-      "value": "sche"
+      "value": "name"
+    },
+    {
+      "termType": "Variable",
+      "value": "date"
+    },
+    {
+      "termType": "Variable",
+      "value": "tname"
     }
   ],
   "where": [
@@ -21,7 +25,7 @@
         {
           "subject": {
             "termType": "Variable",
-            "value": "s"
+            "value": "s_id"
           },
           "predicate": {
             "termType": "NamedNode",
@@ -35,7 +39,7 @@
         {
           "subject": {
             "termType": "Variable",
-            "value": "s"
+            "value": "s_id"
           },
           "predicate": {
             "termType": "NamedNode",
@@ -49,15 +53,29 @@
         {
           "subject": {
             "termType": "Variable",
-            "value": "sche"
+            "value": "s_id"
           },
           "predicate": {
             "termType": "NamedNode",
-            "value": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+            "value": "http://example.com/predicate/movie/played_by"
           },
           "object": {
+            "termType": "Variable",
+            "value": "c_id"
+          }
+        },
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "c_id"
+          },
+          "predicate": {
             "termType": "NamedNode",
-            "value": "http://example.com/ontology/Schedule"
+            "value": "http://example.com/predicate/cast/name"
+          },
+          "object": {
+            "termType": "Variable",
+            "value": "name"
           }
         },
         {
@@ -71,32 +89,52 @@
           },
           "object": {
             "termType": "Variable",
-            "value": "s"
+            "value": "s_id"
+          }
+        },
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "sche"
+          },
+          "predicate": {
+            "termType": "NamedNode",
+            "value": "http://example.com/predicate/schedule/date"
+          },
+          "object": {
+            "termType": "Variable",
+            "value": "date"
+          }
+        },
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "sche"
+          },
+          "predicate": {
+            "termType": "NamedNode",
+            "value": "http://example.com/predicate/movie/Screening_at"
+          },
+          "object": {
+            "termType": "Variable",
+            "value": "t_id"
+          }
+        },
+        {
+          "subject": {
+            "termType": "Variable",
+            "value": "t_id"
+          },
+          "predicate": {
+            "termType": "NamedNode",
+            "value": "http://example.com/predicate/theater/name"
+          },
+          "object": {
+            "termType": "Variable",
+            "value": "tname"
           }
         }
       ]
-    },
-    {
-      "type": "filter",
-      "expression": {
-        "type": "operation",
-        "operator": "=",
-        "args": [
-          {
-            "termType": "Variable",
-            "value": "s"
-          },
-          {
-            "termType": "Literal",
-            "value": "ターミネーター4",
-            "language": "",
-            "datatype": {
-              "termType": "NamedNode",
-              "value": "http://www.w3.org/2001/XMLSchema#string"
-            }
-          }
-        ]
-      }
     }
   ],
   "type": "query",

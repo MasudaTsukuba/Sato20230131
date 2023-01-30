@@ -156,7 +156,7 @@
         "subject":"Var26",
         "predicate":"http://example.com/predicate/theater/address",
         "object":"Var27",
-        "SQL":"SELECT name AS Var26, address AS Var27 FROM Theater;"
+        "SQL":"SELECT t_id AS Var26, address AS Var27 FROM Theater;"
     },
 
     {
@@ -166,7 +166,7 @@
         "subject":"Var28",
         "predicate":"http://example.com/predicate/theater/phone",
         "object":"Var29",
-        "SQL":"SELECT name AS Var28, phone AS Var29 FROM Theater;"
+        "SQL":"SELECT t_id AS Var28, phone AS Var29 FROM Theater;"
     },
 
     {
@@ -176,7 +176,7 @@
         "subject":"Var30",
         "predicate":"http://example.com/predicate/theater/map_code",
         "object":"Var31",
-        "SQL":"SELECT name AS Var30, map_code AS Var31 FROM Theater;"
+        "SQL":"SELECT t_id AS Var30, map_code AS Var31 FROM Theater;"
     },
 
     {
@@ -216,7 +216,7 @@
         "subject":"Var37",
         "predicate":"http://example.com/predicate/movie/Screening_at",
         "object":"Var38",
-        "SQL":"SELECT s_id AS Var37, name AS Var38 FROM Movieplay, Theater WHERE Movieplay.t_id = Theater.t_id;"
+        "SQL":"SELECT s_id AS Var37, Theater.t_id AS Var38 FROM Movieplay, Theater WHERE Movieplay.t_id = Theater.t_id;"
     },
 
     {
@@ -224,7 +224,7 @@
         "subject_uri":"PREFIX_Schedule",
         "object_uri":"plain",
         "subject":"Var39",
-        "predicate":"http://example.com/predicate/theater/date",
+        "predicate":"http://example.com/predicate/schedule/date",
         "object":"Var40",
         "SQL":"SELECT s_id AS Var39, datetime AS Var40 FROM Movieplay;"
     }

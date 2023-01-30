@@ -2,8 +2,6 @@ import json
 import csv
 import sqlite3
 import trans_sql
-import itertools
-from collections import OrderedDict
 
 # ------ ユーザから得て, JSON形式に変換したSPARQLを取り込む --------
 json_open = open('query.json', 'r')
@@ -31,9 +29,8 @@ for i in range(len(query_dict['where'])):
         filter_list.append([prefix[0]['value'],prefix[0]['value'] + ' ' + query_dict['where'][i]['expression']['operator'] + ' "' + prefix[1]['value'] + '"'])
 
 #print(var_list)
-print(filter_list)
+#print(filter_list)
 
-#フィルタリストを作成
 
 
 #SPARQLクエリの各トリプルパターンから候補のSQLクエリを検索
@@ -84,123 +81,50 @@ conn = sqlite3.connect(dbname)
 # SQLiteを操作するためのカーソルを作成
 cur = conn.cursor()
 
-results = []
-headers = []
-
 # それぞれのクエリの実行し、そのクエリ結果や結果のヘッダーを格納
-for q in SQL_query:
-    results.append((cur.execute(q).fetchall()))
-    headers.append([col[0] for col in cur.description])
+select_var = ''
 
-join_result = results[0]
-join_header = headers[0]
+for i in range(len(var_list)):
+    if(i != len(var_list)-1):
+        select_var = select_var + var_list[i] + ', '
+    else:
+        select_var = select_var + var_list[i]
 
-#各クエリ結果をJOINして, ヘッダーをjoin_header, 結果内容をjoin_resultに格納
-# for i in range(1,len(results)):
-#     for j in range(0,len(join_header[0])):
-#         if join_header[j] == headers[i][0]:
-#             join_result = [tuple(OrderedDict.fromkeys(r1 + r2)) for r1 in join_result for r2 in results[i] if r1[0] == r2[0]]
-#             join_header = list(OrderedDict.fromkeys(join_header + headers[i]))
-#             break
-#         elif join_header[j] == headers[i][1]:
-#             join_result = [tuple(OrderedDict.fromkeys(r1 + r2)) for r1 in join_result for r2 in results[i] if r1[0] == r2[1]]
-#             join_header = list(OrderedDict.fromkeys(join_header + headers[i]))
-#             break
-# print(headers)
+exe_query = 'SELECT ' + select_var + ' FROM '
 
-for i in range(1,len(results)):
-    # print(i)
-    # print(headers[i])
-    # print(join_header)
-    for j in range(0,len(join_header)):
-        if join_header[j] == headers[i][0]:
-            join_result = [r1 + r2 for r1 in join_result for r2 in results[i] if r1[j] == r2[0]]
-            join_header = list(join_header + headers[i])
-            break
-        elif len(headers[i]) == 2:
-            if(join_header[j] == headers[i][1]):
-                join_result = [r1 + r2 for r1 in join_result for r2 in results[i] if r1[j] == r2[1]]
-                join_header = list(join_header + headers[i])
-                break
+for i in range(len(SQL_query)):
+    if(i != len(SQL_query)-1):
+        exe_query = exe_query + ' (' +SQL_query[i] + ') NATURAL JOIN '
+    else:
+        exe_query = exe_query + ' (' + SQL_query[i] + ')'
 
-# print(join_header)
-# print(join_result)
+exe_query = exe_query.replace(';','') + ';'
 
-# ------------------------------------------------------------
+results = cur.execute(exe_query).fetchall()
+headers = [col[0] for col in cur.description]
 
 # --------- SQLクエリ結果をSPARQLクエリ結果に合わせるため、必要に応じて文字列->URIに変換する ----------------------------------
 transURI_list = list(set(tuple(i) for i in transURI_list))
 transURI_list = [list(i) for i in transURI_list]
 #print(transURI_list)
 
-join_result = [list(i) for i in join_result]
+results = [list(i) for i in results]
 
+#print(results)
 
-#print(join_result)
+#結果の表示, output.csvに出力される
 
-distinct_head_number_set = []
-distinct_head_set = []
-
-for i in range(len(join_header)):
-    flag1 = 0
-    flag2 = 0
-    for j in range(len(distinct_head_set)):
-        if(distinct_head_set[j] == join_header[i]):
-            flag1 = 1
-            break
-    
-    if flag1 == 0:
-        for j in range(len(var_list)):
-            if(join_header[i] == var_list[j]):
-                flag2 = 1
-                break
-            
-
-    if(flag2 == 1):
-        distinct_head_number_set.append(i)
-        distinct_head_set.append(join_header[i])
-
-#print(join_header)
-#print(distinct_head_number_set)
-#print(distinct_head_set)
-# join_result.append([0,1,2,3,4])
-
-fix = 0
-right = 0
-for i in range(len(distinct_head_number_set)-1):
-    left = distinct_head_number_set[i] - fix
-    right = distinct_head_number_set[i+1] - fix
-    # print(left)
-    # print(right)
-    re_join_result = []
-    if(i == len(distinct_head_number_set)-2):
-        for row in join_result:
-            re_row = row[:left+1] + list(row[right])
-            re_join_result.append(re_row)
-        join_result = re_join_result
-    else:
-        for row in join_result:
-            re_row = row[:left+1] + row[right:]
-            re_join_result.append(re_row)
-        if(right - left > 1):
-            fix = fix + (right - left) - 1
-        join_result = re_join_result
-    #print(re_join_result)
-
-
-#print(join_result)
-
-for i in range(len(distinct_head_set)):
+for i in range(len(headers)):
     for transURI in transURI_list:
-        if((distinct_head_set[i] == transURI[0]) & (transURI[1] != 'plain')):
+        if((headers[i] == transURI[0]) & (transURI[1] != 'plain')):
              with open('./URI/' + transURI[1] + '.csv') as g:
                 reader = csv.reader(g)
                 for row in reader:
-                    for j in range(len(join_result)):
-                        if(join_result[j][i] == row[0]):
-                            join_result[j][i] = row[1]
+                    for j in range(len(results)):
+                        if(results[j][i] == row[0]):
+                            results[j][i] = row[1]
 
 with open('output.csv', mode='w') as file:
     writer = csv.writer(file)
-    writer.writerow(distinct_head_set)
-    writer.writerows(join_result)
+    writer.writerow(headers)
+    writer.writerows(results)
