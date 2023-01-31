@@ -1,0 +1,20 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX ex: <http://example.com/ontology/>
+PREFIX Movie: <http://example.com/predicate/movie/>
+PREFIX Cast: <http://example.com/predicate/cast/>
+PREFIX Schedule: <http://example.com/predicate/schedule/>
+PREFIX Theater: <http://example.com/predicate/theater/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX sch: <http://example.com/schedule/>
+PREFIX The: <http://example.com/theater/>
+PREFIX Wikidata: <https://www.wikidata.org/wiki/>
+
+SELECT ?title ?sche ?date
+WHERE {
+   ?s rdf:type ex:Movie.
+   ?s Movie:title ?title.
+   ?sche rdf:type ex:Schedule.
+   ?sche Movie:Screening ?s.
+   ?sche Schedule:date ?date.
+   FILTER(?title = 'ターミネーター4') 
+} 
